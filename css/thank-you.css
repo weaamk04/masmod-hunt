@@ -1,0 +1,279 @@
+/* =========================
+   PAGE
+========================= */
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+
+    background-color: #f3f3f3;
+}
+
+
+.thankyou-page {
+    width: 100%;
+    max-width: 430px;
+
+    min-height: 100vh;
+
+    padding: 30px 24px 25px;
+
+    background-color: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.thankyou-logo {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    line-height: 0.85;
+
+    color: #111111;
+
+    font-size: 24px;
+    font-weight: 900;
+}
+
+
+.thankyou-logo strong {
+    color: #ed1c24;
+
+    font-size: 34px;
+}
+
+
+/* =========================
+   MASCOT
+========================= */
+
+.mascot-section {
+    position: relative;
+
+    width: 100%;
+
+    margin-top: 45px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.thankyou-mascot {
+    width: 280px;
+    max-width: 85%;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* Decorative shapes */
+
+.mascot-decoration {
+    position: absolute;
+
+    background-color: #ed1c24;
+
+    z-index: 1;
+}
+
+
+.decoration-one {
+    width: 18px;
+    height: 55px;
+
+    left: 40px;
+    top: 40px;
+
+    transform: rotate(-35deg);
+}
+
+
+.decoration-two {
+    width: 35px;
+    height: 35px;
+
+    right: 35px;
+    top: 80px;
+
+    clip-path: polygon(
+        50% 0%,
+        100% 100%,
+        0% 100%
+    );
+
+    transform: rotate(20deg);
+}
+
+
+.decoration-three {
+    width: 14px;
+    height: 42px;
+
+    right: 55px;
+    bottom: 30px;
+
+    transform: rotate(35deg);
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.thankyou-message {
+    margin-top: 28px;
+
+    text-align: center;
+}
+
+
+.thankyou-message h1 {
+    color: #111111;
+
+    font-size: 38px;
+    font-weight: 900;
+
+    line-height: 1;
+}
+
+
+.thankyou-message h1 span {
+    display: block;
+
+    margin-top: 8px;
+
+    color: #ed1c24;
+
+    font-size: 32px;
+}
+
+
+.thankyou-message p {
+    margin-top: 22px;
+
+    color: #444444;
+
+    font-size: 17px;
+    font-weight: 600;
+}
+
+
+/* =========================
+   HOME BUTTON
+========================= */
+
+.home-button {
+    width: 100%;
+    min-height: 62px;
+
+    margin-top: 40px;
+
+    border: none;
+    border-radius: 18px;
+
+    background-color: #ed1c24;
+
+    color: #ffffff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 15px;
+
+    font-size: 18px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(237, 28, 36, 0.18);
+
+    transition: 0.2s ease;
+}
+
+
+.home-button span {
+    font-size: 24px;
+}
+
+
+.home-button:hover {
+    transform: translateY(-2px);
+}
+
+
+.home-button:active {
+    transform: scale(0.98);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.thankyou-footer {
+    margin-top: auto;
+    padding-top: 35px;
+
+    text-align: center;
+}
+
+
+.thankyou-footer p {
+    color: #111111;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    line-height: 1.5;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================
+   SMALL SCREENS
+========================= */
+
+@media (max-width: 370px) {
+
+    .thankyou-page {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+
+    .thankyou-mascot {
+        width: 235px;
+    }
+
+
+    .thankyou-message h1 {
+        font-size: 32px;
+    }
+
+
+    .thankyou-message h1 span {
+        font-size: 27px;
+    }
+
+}

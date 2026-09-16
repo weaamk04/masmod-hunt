@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MASMOD Hunt | Quiz</title>
+
+    <link rel="stylesheet" href="CSS/global.css">
+    <link rel="stylesheet" href="CSS/quiz.css">
+</head>
+
+<body>
+
+    <main class="quiz-page">
+
+        <!-- Top -->
+        <header class="quiz-header">
+
+            <button
+                type="button"
+                class="quit-button"
+                id="quitButton">
+                <span class="quit-icon">×</span>
+                Quit
+            </button>
+
+
+            <div class="quiz-logo">
+                <span>MASMOD</span>
+                <strong>HUNT</strong>
+            </div>
+
+
+            <div
+                class="question-number"
+                id="questionNumber">
+                Q 1/10
+            </div>
+
+        </header>
+
+
+        <!-- Progress + Timer -->
+        <section class="quiz-status">
+
+            <div class="progress-wrapper">
+                <div
+                    class="progress-bar"
+                    id="progressBar">
+                </div>
+            </div>
+
+
+            <div class="timer">
+
+                <span class="timer-icon">◷</span>
+
+                <span id="timerText">
+                    15s
+                </span>
+
+            </div>
+
+            <div class="score-display" id="scoreText">
+                Score: 0
+            </div>
+
+        </section>
+
+
+        <!-- Question -->
+        <section class="question-area">
+
+            <h1 id="questionText">
+                Which of the following is a sign of a phishing email?
+            </h1>
+
+
+            <div
+                class="answers-grid"
+                id="answersContainer">
+
+                <!-- Answers created by JavaScript -->
+
+            </div>
+
+        </section>
+
+
+        <!-- Mascot -->
+        <section class="quiz-mascot-area">
+
+            <img
+                src="assets/images/quiz-mascot.png"
+                alt="MASMOD Hunt Mascot"
+                class="quiz-mascot"
+            >
+
+            <p>
+                THINK. HUNT. WIN.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <script src="js/quiz.js"></script>
+
+</body>
+
+</html>

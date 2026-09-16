@@ -1,0 +1,309 @@
+/* =========================
+   PAGE
+========================= */
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+
+    background-color: #f4f4f4;
+}
+
+
+.leaderboard-page {
+    width: 100%;
+    max-width: 430px;
+
+    min-height: 100vh;
+
+    padding: 28px 24px;
+
+    background-color: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.leaderboard-header {
+    text-align: center;
+}
+
+
+.game-logo {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    line-height: 0.85;
+
+    font-size: 21px;
+    font-weight: 900;
+
+    color: #111111;
+}
+
+
+.game-logo strong {
+    color: #ed1c24;
+
+    font-size: 29px;
+}
+
+
+.leaderboard-header h1 {
+    margin-top: 35px;
+
+    font-size: 32px;
+    font-weight: 800;
+
+    color: #111111;
+}
+
+
+/* =========================
+   LIST
+========================= */
+
+.leaderboard-list {
+    margin-top: 35px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.player-row {
+    min-height: 62px;
+
+    padding: 7px 12px;
+
+    display: grid;
+
+    grid-template-columns:
+        42px 44px 1fr auto;
+
+    align-items: center;
+
+    gap: 8px;
+
+    border-radius: 16px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    transition: 0.2s ease;
+}
+
+
+/* Current player */
+
+.player-row.current-user {
+    background-color: #ffe8e8;
+
+    border: 1px solid #ffcaca;
+}
+
+
+/* =========================
+   RANK
+========================= */
+
+.rank {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background-color: #f1f1f1;
+
+    color: #111111;
+
+    font-weight: 800;
+}
+
+
+.rank.first {
+    background-color: #ffbf24;
+
+    font-size: 21px;
+}
+
+
+.rank.second {
+    background-color: #d7d7d7;
+}
+
+
+.rank.third {
+    background-color: #e38a4c;
+}
+
+
+/* =========================
+   AVATAR
+========================= */
+
+.avatar {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    background-color: #ececec;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #111111;
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+
+.current-user .avatar {
+    background-color: #ed1c24;
+
+    color: #ffffff;
+}
+
+
+/* =========================
+   NAME
+========================= */
+
+.player-name {
+    font-size: 15px;
+    font-weight: 700;
+
+    color: #111111;
+}
+
+
+.you-label {
+    margin-left: 5px;
+
+    color: #ed1c24;
+
+    font-size: 10px;
+    font-weight: 800;
+}
+
+
+/* =========================
+   SCORE
+========================= */
+
+.player-score {
+    font-size: 16px;
+    font-weight: 800;
+
+    color: #111111;
+}
+
+
+/* =========================
+   RESULT BUTTON
+========================= */
+
+.result-button {
+    width: 100%;
+    min-height: 58px;
+
+    margin-top: 30px;
+
+    border-radius: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    background-color: #ed1c24;
+
+    color: #ffffff;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+
+.result-button:hover {
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.leaderboard-footer {
+    margin-top: auto;
+    padding-top: 30px;
+
+    text-align: center;
+}
+
+
+.leaderboard-footer p {
+    color: #111111;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    line-height: 1.4;
+}
+
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media (max-width: 370px) {
+
+    .leaderboard-page {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+
+    .leaderboard-header h1 {
+        font-size: 27px;
+    }
+
+
+    .player-row {
+        grid-template-columns:
+            36px 38px 1fr auto;
+    }
+
+
+    .player-name {
+        font-size: 13px;
+    }
+
+
+    .player-score {
+        font-size: 14px;
+    }
+
+}

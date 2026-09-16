@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Game Complete | MASMOD Hunt</title>
+
+    <link rel="stylesheet" href="CSS/global.css">
+    <link rel="stylesheet" href="CSS/result.css">
+</head>
+
+<body>
+
+    <main class="result-page">
+
+        <!-- Logo -->
+        <header class="result-logo">
+            <span>MASMOD</span>
+            <strong>HUNT</strong>
+        </header>
+
+
+        <!-- Game Complete Section -->
+        <section class="result-intro">
+
+            <div class="intro-text">
+
+                <h1>
+                    GAME<br>
+                    COMPLETE!
+                </h1>
+
+                <h2 id="resultMessage">
+                    Nice Work!
+                </h2>
+
+                <p id="resultSubtitle">
+                    Keep hunting!
+                </p>
+
+            </div>
+
+
+            <img
+                id="resultMascot"
+                class="result-mascot"
+                src="assets/images/result-neutral-mascot.png"
+                alt="MASMOD Hunt Result Mascot"
+            >
+
+        </section>
+
+
+        <!-- Score -->
+        <section class="score-card">
+
+            <p>YOUR SCORE</p>
+
+            <h3 id="scoreValue">
+                0
+            </h3>
+
+        </section>
+
+
+        <!-- Statistics -->
+        <section class="result-stats">
+
+            <div class="stat-item">
+
+                <span class="stat-icon">◆</span>
+
+                <strong id="questionsSolved">
+                    0
+                </strong>
+
+                <p>
+                    QUESTIONS<br>
+                    SOLVED
+                </p>
+
+            </div>
+
+
+            <div class="stat-divider"></div>
+
+
+            <div class="stat-item">
+
+                <span class="stat-icon">✓</span>
+
+                <strong id="correctAnswers">
+                    0
+                </strong>
+
+                <p>
+                    CORRECT<br>
+                    ANSWERS
+                </p>
+
+            </div>
+
+
+            <div class="stat-divider"></div>
+
+
+            <div class="stat-item">
+
+                <span class="stat-icon">◷</span>
+
+                <strong>
+                    1:00
+                </strong>
+
+                <p>
+                    TOTAL<br>
+                    TIME
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Accuracy -->
+        <section class="accuracy-section">
+
+            <span>Accuracy</span>
+
+            <strong id="accuracyValue">
+                0%
+            </strong>
+
+        </section>
+
+
+        <!-- Buttons -->
+        <section class="result-actions">
+
+            <a
+                href="leaderboard.html"
+                class="leaderboard-button">
+                View Leaderboard
+                <span>→</span>
+            </a>
+
+
+            <button
+                type="button"
+                id="playAgainButton"
+                class="play-again-button">
+                Play Again
+                <span>↻</span>
+            </button>
+
+        </section>
+
+
+        <!-- Footer -->
+        <footer class="result-footer">
+
+            DIFFERENT MINDS.
+            <br>
+            A SAFER WORLD.
+
+        </footer>
+
+    </main>
+
+
+    <script src="js/result.js"></script>
+
+</body>
+
+</html>

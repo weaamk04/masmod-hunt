@@ -1,0 +1,384 @@
+/* =========================
+   QUIZ PAGE
+========================= */
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+
+    background-color: #f3f3f3;
+}
+
+
+.quiz-page {
+    width: 100%;
+    max-width: 430px;
+
+    min-height: 100vh;
+
+    padding: 28px 22px 20px;
+
+    background-color: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.quiz-header {
+    display: grid;
+
+    grid-template-columns:
+        1fr auto 1fr;
+
+    align-items: center;
+}
+
+
+.quit-button {
+    border: none;
+    background: none;
+
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 0;
+
+    color: #111111;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    justify-self: start;
+}
+
+
+.quit-icon {
+    font-size: 30px;
+    font-weight: 300;
+
+    line-height: 1;
+}
+
+
+/* Logo */
+
+.quiz-logo {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    line-height: 0.85;
+
+    color: #111111;
+
+    font-size: 18px;
+    font-weight: 900;
+}
+
+
+.quiz-logo strong {
+    color: #ed1c24;
+
+    font-size: 25px;
+}
+
+
+/* Question number */
+
+.question-number {
+    justify-self: end;
+
+    color: #111111;
+
+    font-size: 16px;
+    font-weight: 800;
+}
+
+
+/* =========================
+   PROGRESS + TIMER
+========================= */
+
+.quiz-status {
+    margin-top: 42px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+}
+
+
+.progress-wrapper {
+    flex: 1;
+
+    height: 10px;
+
+    background-color: #e8e8e8;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+
+.progress-bar {
+    width: 10%;
+    height: 100%;
+
+    background-color: #ed1c24;
+
+    border-radius: 20px;
+
+    transition: width 0.3s ease;
+}
+
+
+/* Timer */
+
+.timer {
+    min-width: 63px;
+
+    display: flex;
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 6px;
+
+    color: #ed1c24;
+
+    font-size: 20px;
+    font-weight: 800;
+}
+
+
+.timer-icon {
+    font-size: 25px;
+}
+
+
+/* =========================
+   QUESTION
+========================= */
+
+.question-area {
+    margin-top: 38px;
+}
+
+
+.question-area h1 {
+    min-height: 75px;
+
+    color: #111111;
+
+    font-size: 23px;
+    font-weight: 800;
+
+    line-height: 1.25;
+}
+
+
+/* =========================
+   ANSWERS
+========================= */
+
+.answers-grid {
+    margin-top: 28px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+}
+
+
+.answer-card {
+    min-height: 145px;
+
+    padding: 16px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #eeeeee;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.07);
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.answer-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #ed1c24;
+}
+
+
+/* A B C D */
+
+.answer-letter {
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #eeeeee;
+
+    border-radius: 50%;
+
+    color: #111111;
+
+    font-size: 17px;
+    font-weight: 800;
+}
+
+
+/* Answer text */
+
+.answer-text {
+    margin-top: 20px;
+
+    color: #111111;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    line-height: 1.35;
+}
+
+
+/* Selected answer */
+
+.answer-card.selected {
+    background-color: #ed1c24;
+
+    border-color: #ed1c24;
+
+    color: #ffffff;
+
+    transform: scale(0.98);
+}
+
+
+.answer-card.selected .answer-letter {
+    background-color:
+        rgba(0, 0, 0, 0.18);
+
+    color: #ffffff;
+}
+
+
+.answer-card.selected .answer-text {
+    color: #ffffff;
+}
+
+
+/* Prevent clicking twice */
+
+.answer-card.disabled {
+    pointer-events: none;
+}
+
+
+/* =========================
+   MASCOT
+========================= */
+
+.quiz-mascot-area {
+    margin-top: auto;
+    padding-top: 25px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+
+.quiz-mascot {
+    width: 125px;
+    height: auto;
+
+    object-fit: contain;
+}
+
+
+.quiz-mascot-area p {
+    margin-top: 10px;
+
+    color: #888888;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+}
+
+
+/* =========================
+   SMALL SCREEN
+========================= */
+
+@media (max-width: 370px) {
+
+    .quiz-page {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+
+    .question-area h1 {
+        font-size: 20px;
+    }
+
+
+    .answer-card {
+        min-height: 130px;
+
+        padding: 13px;
+    }
+
+
+    .answer-text {
+        font-size: 12px;
+    }
+
+
+    .quiz-mascot {
+        width: 100px;
+    }
+    .score-display {
+        font-size: 16px;
+        font-weight: 800;
+        color: #111111;
+    }
+
+}

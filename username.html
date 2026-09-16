@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Pick a Nickname | MASMOD Hunt</title>
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="CSS/global.css">
+
+    <!-- Username Page CSS -->
+    <link rel="stylesheet" href="CSS/username.css">
+</head>
+
+<body>
+
+    <main class="nickname-page">
+
+        <!-- Back Button -->
+        <a href="index.html"
+           class="back-button"
+           aria-label="Back to Home">
+            ‹
+        </a>
+
+
+        <!-- Game Logo -->
+        <header class="game-logo">
+            <span class="logo-masmod">MASMOD</span>
+            <span class="logo-hunt">HUNT</span>
+        </header>
+
+
+        <!-- Page Title -->
+        <section class="nickname-header">
+
+            <h1>Pick a Nickname</h1>
+
+            <p>Make it fun!</p>
+
+        </section>
+
+
+        <!-- Nickname Form -->
+        <section class="nickname-form">
+
+            <input
+                type="text"
+                id="nicknameInput"
+                maxlength="18"
+                placeholder="e.g. LinuxNinja"
+                autocomplete="off"
+            >
+
+            <p id="nicknameError"
+               class="error-message">
+                Please choose a nickname.
+            </p>
+
+        </section>
+
+
+        <!-- Suggested Names -->
+        <section class="nickname-suggestions">
+
+            <button class="nickname-option"
+                    type="button">
+                LinuxNinja
+            </button>
+
+            <button class="nickname-option"
+                    type="button">
+                ByteBuddy
+            </button>
+
+            <button class="nickname-option"
+                    type="button">
+                KernelKing
+            </button>
+
+            <button class="nickname-option"
+                    type="button">
+                PingMaster
+            </button>
+
+            <button class="nickname-option"
+                    type="button">
+                RootRookie
+            </button>
+
+            <button class="nickname-option"
+                    type="button">
+                CyberCat
+            </button>
+
+        </section>
+
+
+        <!-- Mascot -->
+        <section class="mascot-area">
+
+            <img
+                src="assets/images/nickname-mascot.png"
+                alt="MASMOD Hunt Mascot"
+                class="nickname-mascot"
+            >
+
+            <div class="mascot-message">
+                BE ANONYMOUS
+                <br>
+                BE AWESOME
+                <br>
+                :)
+            </div>
+
+        </section>
+
+
+        <!-- Next Button -->
+        <button
+            type="button"
+            id="nextButton"
+            class="next-button">
+            Start the Hunt
+            <span>→</span>
+        </button>
+
+
+        <!-- Bottom Text -->
+        <footer class="nickname-footer">
+            THINK. HUNT. WIN.
+        </footer>
+
+    </main>
+
+
+    <script src="js/username.js"></script>
+
+</body>
+
+</html>
