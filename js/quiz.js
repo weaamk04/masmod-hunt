@@ -1,87 +1,27 @@
-/* =========================
-   QUESTIONS
-========================= */
+import { auth, db } from "./firebase-config.js";
 
-const questions = [
+import { signInAnonymously } from
+    "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
-    {
-        question:
-            "Which of the following is a sign of a phishing email?",
-
-        answers: [
-            "A known sender's email",
-            "A link with a suspicious URL",
-            "Proper grammar and spelling",
-            "An official company logo"
-        ],
-
-        correct: 1
-    },
-
-    {
-        question:
-            "What should you do if you receive a suspicious link?",
-
-        answers: [
-            "Click it immediately",
-            "Forward it to everyone",
-            "Avoid clicking and verify the sender",
-            "Reply with your password"
-        ],
-
-        correct: 2
-    },
-
-    {
-        question:
-            "Which password is the strongest?",
-
-        answers: [
-            "12345678",
-            "password",
-            "Masmod123",
-            "M@sM0d!9x#27"
-        ],
-
-        correct: 3
-    },
-
-    {
-        question:
-            "What does two-factor authentication add?",
-
-        answers: [
-            "An extra security step",
-            "A faster internet connection",
-            "More storage",
-            "A new username"
-        ],
-
-        correct: 0
-    },
-
-    {
-        question:
-            "What should you do with your passwords?",
-
-        answers: [
-            "Share them with friends",
-            "Use the same one everywhere",
-            "Keep them private",
-            "Post them online"
-        ],
-
-        correct: 2
-    }
-
-];
+import {
+    collection,
+    getDocs,
+    query,
+    where,
+    doc,
+    updateDoc,
+    serverTimestamp
+} from
+    "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
 /* =========================
    VARIABLES
 ========================= */
 
-let currentQuestion;
+let questions = [];
+
+let currentQuestion = null;
 
 let lastQuestionIndex = -1;
 
@@ -93,9 +33,9 @@ let correctCount = 0;
 
 let timeLeft = 60;
 
-let gameTimer;
+let gameTimer = null;
 
-let answerLocked = false;
+let answerLocked = true;
 
 let gameFinished = false;
 
@@ -122,6 +62,48 @@ const scoreText =
 const quitButton =
     document.getElementById("quitButton");
 
+const progressBar =
+    document.getElementById("progressBar");
+
+
+/* =========================
+   GET QUESTIONS
+========================= */
+
+async function getQuestionsFromFirebase() {
+
+    const questionsQuery =
+        query(
+            collection(db, "questions"),
+            where("active", "==", true)
+        );
+
+
+    const snapshot =
+        await getDocs(questionsQuery);
+
+
+    questions =
+        snapshot.docs.map(document => {
+
+            return {
+                documentId: document.id,
+                ...document.data()
+            };
+
+        });
+
+
+    if (questions.length === 0) {
+
+        throw new Error(
+            "No active questions found."
+        );
+
+    }
+
+}
+
 
 /* =========================
    RANDOM QUESTION
@@ -131,22 +113,37 @@ function getRandomQuestion() {
 
     let randomIndex;
 
-    do {
 
-        randomIndex =
-            Math.floor(
-                Math.random() * questions.length
-            );
+    if (questions.length === 1) {
 
-    } while (
-        randomIndex === lastQuestionIndex &&
-        questions.length > 1
-    );
+        randomIndex = 0;
+
+    }
+
+    else {
+
+        do {
+
+            randomIndex =
+                Math.floor(
+                    Math.random() *
+                    questions.length
+                );
+
+        } while (
+            randomIndex ===
+            lastQuestionIndex
+        );
+
+    }
 
 
-    lastQuestionIndex = randomIndex;
+    lastQuestionIndex =
+        randomIndex;
+
 
     return questions[randomIndex];
+
 }
 
 
@@ -166,10 +163,10 @@ function loadQuestion() {
 
     currentQuestion =
         getRandomQuestion();
-
+console.log(currentQuestion);
 
     questionText.textContent =
-        currentQuestion.question;
+        currentQuestion.scenario;
 
 
     questionNumber.textContent =
@@ -180,6 +177,19 @@ function loadQuestion() {
         "Score: " + score;
 
 
+    renderAnswers(
+        currentQuestion.options
+    );
+
+}
+
+
+/* =========================
+   RENDER ANSWERS
+========================= */
+
+function renderAnswers(options) {
+
     answersContainer.innerHTML = "";
 
 
@@ -187,46 +197,56 @@ function loadQuestion() {
         ["A", "B", "C", "D"];
 
 
-    currentQuestion.answers.forEach(
-        (answer, index) => {
+    letters.forEach(letter => {
 
-            const button =
-                document.createElement("button");
-
-
-            button.className =
-                "answer-card";
+        const answer =
+            options[letter];
 
 
-            button.type = "button";
-
-
-            button.innerHTML = `
-                <span class="answer-letter">
-                    ${letters[index]}
-                </span>
-
-                <span class="answer-text">
-                    ${answer}
-                </span>
-            `;
-
-
-            button.addEventListener(
-                "click",
-                () => selectAnswer(
-                    index,
-                    button
-                )
-            );
-
-
-            answersContainer.appendChild(
-                button
-            );
-
+        if (!answer) {
+            return;
         }
-    );
+
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+
+        button.className =
+            "answer-card";
+
+
+        button.type =
+            "button";
+
+
+        button.innerHTML = `
+            <span class="answer-letter">
+                ${letter}
+            </span>
+
+            <span class="answer-text">
+                ${answer}
+            </span>
+        `;
+
+
+        button.addEventListener(
+            "click",
+            () => selectAnswer(
+                letter,
+                button
+            )
+        );
+
+
+        answersContainer.appendChild(
+            button
+        );
+
+    });
 
 }
 
@@ -236,7 +256,7 @@ function loadQuestion() {
 ========================= */
 
 function selectAnswer(
-    selectedIndex,
+    selectedLetter,
     selectedButton
 ) {
 
@@ -249,41 +269,6 @@ function selectAnswer(
 
 
     answerLocked = true;
-
-    answeredCount++;
-
-
-    const isCorrect =
-        selectedIndex ===
-        currentQuestion.correct;
-
-
-    if (isCorrect) {
-
-        score += 10;
-
-        correctCount++;
-
-    }
-
-    else {
-
-        score -= 5;
-
-    }
-
-
-    selectedButton.classList.add(
-        "selected"
-    );
-
-
-    scoreText.textContent =
-        "Score: " + score;
-
-
-    questionNumber.textContent =
-        "Solved: " + answeredCount;
 
 
     const allAnswers =
@@ -301,7 +286,47 @@ function selectAnswer(
     });
 
 
-    /* سؤال جديد بسرعة */
+    selectedButton.classList.add(
+        "selected"
+    );
+
+
+    answeredCount++;
+
+
+    const selectedAnswer =
+        currentQuestion.options[
+            selectedLetter
+        ];
+
+
+    const isCorrect =
+        selectedAnswer ===
+        currentQuestion.threatCategory;
+
+
+    if (isCorrect) {
+
+        score += 10;
+
+        correctCount++;
+
+    }
+
+    else {
+
+        score -= 5;
+
+    }
+
+
+    scoreText.textContent =
+        "Score: " + score;
+
+
+    questionNumber.textContent =
+        "Solved: " + answeredCount;
+
 
     setTimeout(() => {
 
@@ -313,13 +338,16 @@ function selectAnswer(
 
 
 /* =========================
-   60 SECOND GAME TIMER
+   TIMER
 ========================= */
 
 function startGameTimer() {
 
     timerText.textContent =
         timeLeft + "s";
+
+
+    updateProgressBar();
 
 
     gameTimer =
@@ -332,9 +360,15 @@ function startGameTimer() {
                 timeLeft + "s";
 
 
+            updateProgressBar();
+
+
             if (timeLeft <= 0) {
 
-                clearInterval(gameTimer);
+                clearInterval(
+                    gameTimer
+                );
+
 
                 finishGame();
 
@@ -346,10 +380,76 @@ function startGameTimer() {
 
 
 /* =========================
+   PROGRESS BAR
+========================= */
+
+function updateProgressBar() {
+
+    if (!progressBar) {
+        return;
+    }
+
+
+    const percentage =
+        (timeLeft / 60) * 100;
+
+
+    progressBar.style.width =
+        percentage + "%";
+
+}
+
+
+/* =========================
+   SAVE RESULT
+========================= */
+
+async function saveResultToFirebase() {
+
+    console.log("START SAVING RESULT");
+
+
+    const playerRef =
+        doc(
+            db,
+            "sessions",
+            "demo-session",
+            "players",
+            "username"
+        );
+
+
+    await updateDoc(
+        playerRef,
+        {
+            score: score,
+
+            totalQuestions:
+                answeredCount,
+
+            correctAnswers:
+                correctCount,
+
+            completedAt:
+                serverTimestamp()
+        }
+    );
+
+
+    console.log(
+        "PLAYER UPDATED SUCCESSFULLY"
+    );
+
+}
+
+/* =========================
    FINISH GAME
 ========================= */
 
-function finishGame() {
+async function finishGame() {
+
+    console.log("FINISH GAME STARTED");
+
 
     if (gameFinished) {
         return;
@@ -360,10 +460,15 @@ function finishGame() {
 
     answerLocked = true;
 
-    clearInterval(gameTimer);
 
+    if (gameTimer) {
 
-    /* Save results */
+        clearInterval(
+            gameTimer
+        );
+
+    }
+
 
     localStorage.setItem(
         "masmodScore",
@@ -383,12 +488,26 @@ function finishGame() {
     );
 
 
-    /* Go to Leaderboard */
+    try {
 
-    window.location.href = "result.html";
+        await saveResultToFirebase();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Could not save player result:",
+            error
+        );
+
+    }
+
+
+    window.location.href =
+        "result.html";
 
 }
-
 
 /* =========================
    QUIT
@@ -398,26 +517,68 @@ quitButton.addEventListener(
     "click",
     () => {
 
-        const confirmQuit =
-            confirm(
-                "Are you sure you want to quit the hunt?"
-            );
+        console.log("QUIT BUTTON CLICKED");
 
-
-        if (confirmQuit) {
-
-            finishGame();
-
-        }
+        finishGame();
 
     }
 );
-
 
 /* =========================
    START GAME
 ========================= */
 
-loadQuestion();
+async function startGame() {
 
-startGameTimer();
+    questionText.textContent =
+        "Loading questions...";
+
+
+    scoreText.textContent =
+        "Score: 0";
+
+
+    questionNumber.textContent =
+        "Solved: 0";
+
+
+    timerText.textContent =
+        "60s";
+
+
+    updateProgressBar();
+
+
+    try {
+
+        await signInAnonymously(auth);
+
+
+        await getQuestionsFromFirebase();
+
+
+        loadQuestion();
+
+
+        startGameTimer();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+
+        questionText.textContent =
+            "Unable to load questions.";
+
+
+        answersContainer.innerHTML =
+            "";
+
+    }
+
+}
+
+
+startGame();

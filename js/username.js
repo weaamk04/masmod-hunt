@@ -1,35 +1,32 @@
 const nicknameInput = document.getElementById("nicknameInput");
-const nicknameOptions = document.querySelectorAll(".nickname-option");
+const avatarOptions = document.querySelectorAll(".avatar-option");
 const nextButton = document.getElementById("nextButton");
 const errorMessage = document.getElementById("nicknameError");
 
 
-// لما يختار اسم جاهز
-nicknameOptions.forEach(option => {
+// Default selected avatar
+let selectedAvatar = "avatar-1.png";
+
+
+// Avatar selection
+avatarOptions.forEach(option => {
 
     option.addEventListener("click", () => {
 
-        nicknameOptions.forEach(button => {
+        avatarOptions.forEach(button => {
             button.classList.remove("selected");
         });
 
         option.classList.add("selected");
 
-        nicknameInput.value = option.textContent.trim();
-
-        errorMessage.style.display = "none";
+        selectedAvatar = option.dataset.avatar;
     });
 
 });
 
 
-// لما يكتب اسم بنفسه
+// Nickname input
 nicknameInput.addEventListener("input", () => {
-
-    nicknameOptions.forEach(button => {
-        button.classList.remove("selected");
-    });
-
     errorMessage.style.display = "none";
 });
 
@@ -48,10 +45,13 @@ nextButton.addEventListener("click", () => {
         return;
     }
 
-    // نخزن الاسم
-    localStorage.setItem("masmodNickname", nickname);
 
-    // نروح للعبة
+    // Save player data
+    localStorage.setItem("masmodNickname", nickname);
+    localStorage.setItem("masmodAvatar", selectedAvatar);
+
+
+    // Go to quiz
     window.location.href = "quiz.html";
 
 });

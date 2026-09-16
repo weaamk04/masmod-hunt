@@ -71,7 +71,9 @@ body {
 }
 
 
-/* Logo */
+/* =========================
+   GAME LOGO
+========================= */
 
 .quiz-logo {
     display: flex;
@@ -83,19 +85,24 @@ body {
 
     color: #111111;
 
+    font-family: "Bagel Fat One", system-ui;
     font-size: 18px;
-    font-weight: 900;
+    font-weight: 400;
 }
 
 
 .quiz-logo strong {
-    color: #ed1c24;
+    color: var(--red);
 
+    font-family: "Bagel Fat One", system-ui;
     font-size: 25px;
+    font-weight: 400;
 }
 
 
-/* Question number */
+/* =========================
+   QUESTION NUMBER
+========================= */
 
 .question-number {
     justify-self: end;
@@ -138,7 +145,7 @@ body {
     width: 10%;
     height: 100%;
 
-    background-color: #ed1c24;
+    background-color: var(--red);
 
     border-radius: 20px;
 
@@ -158,7 +165,7 @@ body {
 
     gap: 6px;
 
-    color: #ed1c24;
+    color: var(--red);
 
     font-size: 20px;
     font-weight: 800;
@@ -167,6 +174,14 @@ body {
 
 .timer-icon {
     font-size: 25px;
+}
+
+
+.score-display {
+    color: #111111;
+
+    font-size: 16px;
+    font-weight: 800;
 }
 
 
@@ -214,12 +229,12 @@ body {
 
     background-color: #ffffff;
 
-    border: 1px solid #eeeeee;
+    border: 1.5px solid #d6d6d6;
 
     border-radius: 16px;
 
     box-shadow:
-        0 5px 18px rgba(0, 0, 0, 0.07);
+        0 6px 16px rgba(0, 0, 0, 0.06);
 
     display: flex;
     flex-direction: column;
@@ -230,14 +245,23 @@ body {
 
     cursor: pointer;
 
-    transition: 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 
-.answer-card:hover {
-    transform: translateY(-2px);
+/* Hover */
 
-    border-color: #ed1c24;
+.answer-card:hover {
+    transform: translateY(-3px);
+
+    border-color: var(--red);
+
+    box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.09),
+        0 0 0 1px rgba(168, 0, 0, 0.08);
 }
 
 
@@ -259,6 +283,8 @@ body {
 
     font-size: 17px;
     font-weight: 800;
+
+    transition: 0.2s ease;
 }
 
 
@@ -279,26 +305,27 @@ body {
 /* Selected answer */
 
 .answer-card.selected {
-    background-color: #ed1c24;
+    background-color: #ffffff;
 
-    border-color: #ed1c24;
+    border: 2px solid var(--red);
 
-    color: #ffffff;
+    box-shadow:
+        0 0 0 2px rgba(168, 0, 0, 0.08),
+        0 7px 18px rgba(0, 0, 0, 0.08);
 
     transform: scale(0.98);
 }
 
 
 .answer-card.selected .answer-letter {
-    background-color:
-        rgba(0, 0, 0, 0.18);
+    background-color: var(--red);
 
     color: #ffffff;
 }
 
 
 .answer-card.selected .answer-text {
-    color: #ffffff;
+    color: #111111;
 }
 
 
@@ -325,7 +352,7 @@ body {
 
 
 .quiz-mascot {
-    width: 125px;
+    width: 230px;
     height: auto;
 
     object-fit: contain;
@@ -375,10 +402,10 @@ body {
     .quiz-mascot {
         width: 100px;
     }
+
+
     .score-display {
         font-size: 16px;
-        font-weight: 800;
-        color: #111111;
     }
 
 }

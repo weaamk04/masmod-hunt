@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap');
+
+
 /* =========================
    GLOBAL SETTINGS
 ========================= */
 
 :root {
-    --red: #ed1c24;
+    --red: #A80000;
     --black: #111111;
     --white: #ffffff;
     --light-gray: #f5f5f5;
@@ -25,7 +28,7 @@ html {
 
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Original Surfer", system-ui;
     background-color: var(--white);
     color: var(--black);
 }
@@ -45,7 +48,13 @@ a {
     text-decoration: none;
 }
 
-
+button,
+input,
+textarea,
+select,
+a {
+    font-family: "Original Surfer", system-ui;
+}
 /* =========================
    GLOBAL BUTTON
 ========================= */

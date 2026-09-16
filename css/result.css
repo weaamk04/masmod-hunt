@@ -43,15 +43,20 @@ body {
 
     color: #111111;
 
+    font-family: "Bagel Fat One", system-ui;
+
     font-size: 21px;
-    font-weight: 900;
+    font-weight: 400;
 }
 
 
 .result-logo strong {
-    color: #ed1c24;
+    color: var(--red);
+
+    font-family: "Bagel Fat One", system-ui;
 
     font-size: 30px;
+    font-weight: 400;
 }
 
 
@@ -101,7 +106,7 @@ body {
 
     margin-top: 12px;
 
-    background-color: #ed1c24;
+    background-color: var(--red);
 
     border-radius: 10px;
 }
@@ -134,7 +139,7 @@ body {
 .result-mascot {
     position: absolute;
 
-    right: -25px;
+    right: -45px;
     bottom: 0;
 
     width: 235px;
@@ -179,7 +184,7 @@ body {
 .score-card h3 {
     margin-top: 5px;
 
-    color: #ed1c24;
+    color: var(--red);
 
     font-size: 58px;
     font-weight: 900;
@@ -221,7 +226,7 @@ body {
 
     background-color: #ffe9e9;
 
-    color: #ed1c24;
+    color: var(--red);
 
     font-size: 20px;
     font-weight: 900;
@@ -286,7 +291,7 @@ body {
 
 
 .accuracy-section strong {
-    color: #ed1c24;
+    color: var(--red);
 
     font-size: 21px;
     font-weight: 900;
@@ -319,7 +324,7 @@ body {
 
     border-radius: 18px;
 
-    background-color: #ed1c24;
+    background-color: var(--red);
 
     color: #ffffff;
 

@@ -45,15 +45,18 @@ body {
 
     color: #111111;
 
+    font-family: "Bagel Fat One", system-ui;
     font-size: 24px;
-    font-weight: 900;
+    font-weight: 400;
 }
 
 
 .thankyou-logo strong {
-    color: #ed1c24;
+    color: var(--red);
 
+    font-family: "Bagel Fat One", system-ui;
     font-size: 34px;
+    font-weight: 400;
 }
 
 
@@ -89,7 +92,7 @@ body {
 .mascot-decoration {
     position: absolute;
 
-    background-color: #ed1c24;
+    background-color: var(--red);
 
     z-index: 1;
 }
@@ -160,7 +163,7 @@ body {
 
     margin-top: 8px;
 
-    color: #ed1c24;
+    color: var(--red);
 
     font-size: 32px;
 }
@@ -189,7 +192,7 @@ body {
     border: none;
     border-radius: 18px;
 
-    background-color: #ed1c24;
+    background-color: var(--red);
 
     color: #ffffff;
 
@@ -205,7 +208,7 @@ body {
     cursor: pointer;
 
     box-shadow:
-        0 8px 20px rgba(237, 28, 36, 0.18);
+        0 8px 20px rgba(168, 0, 0, 0.18);
 
     transition: 0.2s ease;
 }

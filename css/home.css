@@ -55,8 +55,9 @@
 
     line-height: 0.85;
 
+    font-family: "Bagel Fat One", system-ui;
     font-size: 58px;
-    font-weight: 900;
+    font-weight: 400;
 }
 
 
@@ -98,11 +99,18 @@
 
 
 .mascot {
-    width: 290px;
+    width: 330px;
+    max-width: 100%;
+    height: auto;
+
+    display: block;
+
+    margin: 0 auto;
 
     position: relative;
-
     z-index: 2;
+
+    object-fit: contain;
 }
 
 

@@ -9,6 +9,20 @@
 
     <title>Pick a Nickname | MASMOD Hunt</title>
 
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Original+Surfer&display=swap"
+        rel="stylesheet"
+    >
+
+
     <!-- Global CSS -->
     <link rel="stylesheet" href="CSS/global.css">
 
@@ -38,7 +52,10 @@
         <!-- Page Title -->
         <section class="nickname-header">
 
-            <h1>Pick a Nickname</h1>
+            <h1>
+    Pick a
+    <span class="nickname-highlight">Nickname</span>
+</h1>
 
             <p>Make it fun!</p>
 
@@ -64,38 +81,103 @@
         </section>
 
 
-        <!-- Suggested Names -->
-        <section class="nickname-suggestions">
+        <!-- Avatar Selection -->
+        <section class="avatar-section">
 
-            <button class="nickname-option"
-                    type="button">
-                LinuxNinja
-            </button>
+            <div class="avatar-title-row">
 
-            <button class="nickname-option"
-                    type="button">
-                ByteBuddy
-            </button>
+                <h2>Choose Your Avatar</h2>
 
-            <button class="nickname-option"
-                    type="button">
-                KernelKing
-            </button>
+           
+            </div>
 
-            <button class="nickname-option"
-                    type="button">
-                PingMaster
-            </button>
 
-            <button class="nickname-option"
-                    type="button">
-                RootRookie
-            </button>
+            <div class="avatar-options">
 
-            <button class="nickname-option"
-                    type="button">
-                CyberCat
-            </button>
+                <button
+                    type="button"
+                    class="avatar-option selected"
+                    data-avatar="avatar-1.png"
+                    aria-label="Choose avatar 1">
+
+                    <img
+                        src="assets/images/avatars/avatar-1.png"
+                        alt="Penguin Avatar 1"
+                    >
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="avatar-option"
+                    data-avatar="avatar-2.png"
+                    aria-label="Choose avatar 2">
+
+                    <img
+                        src="assets/images/avatars/avatar-2.png"
+                        alt="Penguin Avatar 2"
+                    >
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="avatar-option"
+                    data-avatar="avatar-3.png"
+                    aria-label="Choose avatar 3">
+
+                    <img
+                        src="assets/images/avatars/avatar-3.png"
+                        alt="Penguin Avatar 3"
+                    >
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="avatar-option"
+                    data-avatar="avatar-4.png"
+                    aria-label="Choose avatar 4">
+
+                    <img
+                        src="assets/images/avatars/avatar-4.png"
+                        alt="Penguin Avatar 4"
+                    >
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="avatar-option"
+                    data-avatar="avatar-5.png"
+                    aria-label="Choose avatar 5">
+
+                    <img
+                        src="assets/images/avatars/avatar-5.png"
+                        alt="Penguin Avatar 5"
+                    >
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="avatar-option"
+                    data-avatar="avatar-6.png"
+                    aria-label="Choose avatar 6">
+
+                    <img
+                        src="assets/images/avatars/avatar-6.png"
+                        alt="Penguin Avatar 6"
+                    >
+
+                </button>
+
+            </div>
 
         </section>
 
@@ -109,14 +191,6 @@
                 class="nickname-mascot"
             >
 
-            <div class="mascot-message">
-                BE ANONYMOUS
-                <br>
-                BE AWESOME
-                <br>
-                :)
-            </div>
-
         </section>
 
 
@@ -125,15 +199,12 @@
             type="button"
             id="nextButton"
             class="next-button">
+
             Start the Hunt
+
             <span>→</span>
+
         </button>
-
-
-        <!-- Bottom Text -->
-        <footer class="nickname-footer">
-            THINK. HUNT. WIN.
-        </footer>
 
     </main>
 

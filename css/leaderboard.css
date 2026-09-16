@@ -36,6 +36,8 @@ body {
 }
 
 
+/* Game Name Only */
+
 .game-logo {
     display: flex;
     flex-direction: column;
@@ -44,17 +46,20 @@ body {
 
     line-height: 0.85;
 
+    font-family: "Bagel Fat One", system-ui;
     font-size: 21px;
-    font-weight: 900;
+    font-weight: 400;
 
     color: #111111;
 }
 
 
 .game-logo strong {
-    color: #ed1c24;
+    color: var(--red);
 
+    font-family: "Bagel Fat One", system-ui;
     font-size: 29px;
+    font-weight: 400;
 }
 
 
@@ -176,7 +181,7 @@ body {
 
 
 .current-user .avatar {
-    background-color: #ed1c24;
+    background-color: var(--red);
 
     color: #ffffff;
 }
@@ -197,7 +202,7 @@ body {
 .you-label {
     margin-left: 5px;
 
-    color: #ed1c24;
+    color: var(--red);
 
     font-size: 10px;
     font-weight: 800;
@@ -234,7 +239,7 @@ body {
 
     gap: 12px;
 
-    background-color: #ed1c24;
+    background-color: var(--red);
 
     color: #ffffff;
 

@@ -1,93 +1,26 @@
-/* =========================
-   CURRENT PLAYER
-========================= */
+import { auth, db } from "./firebase-config.js";
 
-const nickname =
-    localStorage.getItem("masmodNickname")
-    || "Player";
+import {
+    collection,
+    query,
+    orderBy,
+    onSnapshot
+} from
+    "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
-
-const correctAnswers =
-    Number(
-        localStorage.getItem("masmodScore")
-    ) || 0;
-
-
-const answeredQuestions =
-    Number(
-        localStorage.getItem("masmodAnswered")
-    ) || 0;
-
-
-/* كل إجابة صحيحة = 100 نقطة */
-
-const playerPoints =
-    Number(
-        localStorage.getItem("masmodScore")
-    ) || 0;
-
-/* =========================
-   SAMPLE PLAYERS
-========================= */
-
-const players = [
-
-    {
-        name: "CyberStar",
-        score: 1250
-    },
-
-    {
-        name: "SecureMind",
-        score: 980
-    },
-
-    {
-        name: "RedTeam",
-        score: 910
-    },
-
-    {
-        name: "ByteDefender",
-        score: 860
-    },
-
-    {
-        name: "HackWise",
-        score: 780
-    },
-
-    {
-        name: "NetNinja",
-        score: 690
-    },
-
-    {
-        name: "SafeUser",
-        score: 620
-    }
-
-];
+import {
+    onAuthStateChanged
+} from
+    "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 
 /* =========================
-   ADD CURRENT PLAYER
+   VARIABLES
 ========================= */
 
-players.push({
-    name: nickname,
-    score: playerPoints,
-    currentUser: true
-});
+let players = [];
 
-
-/* =========================
-   SORT
-========================= */
-
-players.sort(
-    (a, b) => b.score - a.score
-);
+let currentUserId = null;
 
 
 /* =========================
@@ -101,104 +34,349 @@ const leaderboardList =
 
 
 /* =========================
-   CREATE LEADERBOARD
+   CURRENT USER
 ========================= */
 
-players.forEach(
-    (player, index) => {
+onAuthStateChanged(
+    auth,
+    user => {
 
-        const row =
-            document.createElement("div");
+        if (user) {
 
-
-        row.className =
-            "player-row";
-
-
-        if (player.currentUser) {
-
-            row.classList.add(
-                "current-user"
-            );
-        }
-
-
-        const rankNumber =
-            index + 1;
-
-
-        let rankClass = "";
-
-        let rankText =
-            rankNumber;
-
-
-        if (rankNumber === 1) {
-
-            rankClass = "first";
-
-            rankText = "♛";
+            currentUserId =
+                user.uid;
 
         }
 
-        else if (rankNumber === 2) {
+        else {
 
-            rankClass = "second";
-
-        }
-
-        else if (rankNumber === 3) {
-
-            rankClass = "third";
+            currentUserId =
+                null;
 
         }
 
 
-        /* Initials */
-
-        const initials =
-            player.name
-                .substring(0, 2)
-                .toUpperCase();
-
-
-        row.innerHTML = `
-
-            <div class="rank ${rankClass}">
-                ${rankText}
-            </div>
-
-
-            <div class="avatar">
-                ${initials}
-            </div>
-
-
-            <div class="player-name">
-
-                ${player.name}
-
-                ${
-                    player.currentUser
-                    ? '<span class="you-label">YOU</span>'
-                    : ''
-                }
-
-            </div>
-
-
-            <div class="player-score">
-
-                ${player.score.toLocaleString()}
-
-            </div>
-
-        `;
-
-
-        leaderboardList.appendChild(
-            row
-        );
+        renderLeaderboard();
 
     }
 );
+
+
+/* =========================
+   GET PLAYERS
+========================= */
+
+const playersCollection =
+    collection(
+        db,
+        "sessions",
+        "demo-session",
+        "players"
+    );
+
+
+const playersQuery =
+    query(
+        playersCollection,
+        orderBy("score", "desc")
+    );
+
+
+onSnapshot(
+    playersQuery,
+
+    snapshot => {
+
+        players =
+            snapshot.docs.map(
+                document => {
+
+                    return {
+                        documentId:
+                            document.id,
+
+                        ...document.data()
+                    };
+
+                }
+            );
+
+
+        renderLeaderboard();
+
+    },
+
+    error => {
+
+        console.error(
+            "Could not load leaderboard:",
+            error
+        );
+
+
+        leaderboardList.innerHTML = `
+            <p class="leaderboard-error">
+                Unable to load leaderboard.
+            </p>
+        `;
+
+    }
+);
+
+
+/* =========================
+   CREATE LEADERBOARD
+========================= */
+
+function renderLeaderboard() {
+
+    leaderboardList.innerHTML = "";
+
+
+    if (players.length === 0) {
+
+        leaderboardList.innerHTML = `
+            <p class="leaderboard-empty">
+                No players yet.
+            </p>
+        `;
+
+        return;
+    }
+
+
+    players.forEach(
+        (player, index) => {
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+
+            row.className =
+                "player-row";
+
+
+            const isCurrentUser =
+                player.userId ===
+                currentUserId;
+
+
+            if (isCurrentUser) {
+
+                row.classList.add(
+                    "current-user"
+                );
+
+            }
+
+
+            /* =========================
+               RANK
+            ========================= */
+
+            const rankNumber =
+                index + 1;
+
+
+            const rank =
+                document.createElement(
+                    "div"
+                );
+
+
+            rank.className =
+                "rank";
+
+
+            if (rankNumber === 1) {
+
+                rank.classList.add(
+                    "first"
+                );
+
+                rank.textContent =
+                    "♛";
+
+            }
+
+            else if (
+                rankNumber === 2
+            ) {
+
+                rank.classList.add(
+                    "second"
+                );
+
+                rank.textContent =
+                    rankNumber;
+
+            }
+
+            else if (
+                rankNumber === 3
+            ) {
+
+                rank.classList.add(
+                    "third"
+                );
+
+                rank.textContent =
+                    rankNumber;
+
+            }
+
+            else {
+
+                rank.textContent =
+                    rankNumber;
+
+            }
+
+
+            /* =========================
+               AVATAR
+            ========================= */
+
+            const avatar =
+                document.createElement(
+                    "div"
+                );
+
+
+            avatar.className =
+                "avatar";
+
+
+            const avatarImage =
+                document.createElement(
+                    "img"
+                );
+
+
+            avatarImage.src =
+                `assets/images/avatars/${
+                    player.avatar ||
+                    "avatar-1.png"
+                }`;
+
+
+            avatarImage.alt =
+                "Player avatar";
+
+
+            avatar.appendChild(
+                avatarImage
+            );
+
+
+            /* =========================
+               PLAYER NAME
+            ========================= */
+
+            const playerName =
+                document.createElement(
+                    "div"
+                );
+
+
+            playerName.className =
+                "player-name";
+
+
+            const nameText =
+                document.createElement(
+                    "span"
+                );
+
+
+            nameText.textContent =
+                player.nickname ||
+                "Player";
+
+
+            playerName.appendChild(
+                nameText
+            );
+
+
+            if (isCurrentUser) {
+
+                const youLabel =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                youLabel.className =
+                    "you-label";
+
+
+                youLabel.textContent =
+                    "YOU";
+
+
+                playerName.appendChild(
+                    youLabel
+                );
+
+            }
+
+
+            /* =========================
+               SCORE
+            ========================= */
+
+            const playerScore =
+                document.createElement(
+                    "div"
+                );
+
+
+            playerScore.className =
+                "player-score";
+
+
+            const score =
+                Number(
+                    player.score
+                ) || 0;
+
+
+            playerScore.textContent =
+                score.toLocaleString();
+
+
+            /* =========================
+               ADD ROW
+            ========================= */
+
+            row.appendChild(
+                rank
+            );
+
+
+            row.appendChild(
+                avatar
+            );
+
+
+            row.appendChild(
+                playerName
+            );
+
+
+            row.appendChild(
+                playerScore
+            );
+
+
+            leaderboardList.appendChild(
+                row
+            );
+
+        }
+    );
+
+}
