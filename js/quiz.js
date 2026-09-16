@@ -163,7 +163,7 @@ function loadQuestion() {
 
     currentQuestion =
         getRandomQuestion();
-console.log(currentQuestion);
+
 
     questionText.textContent =
         currentQuestion.scenario;
